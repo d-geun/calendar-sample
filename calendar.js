@@ -23,7 +23,7 @@ function renderCalandar() {
     
     // 현재 월의 첫 번째 날짜
     const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
-    // 현재 월의 0 번째 날짜 == 마지막 날짜
+    // 다음 달의 0 번째 날짜 => 현재 월의 마지막 날짜
     const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
     // 현재 월의 첫 번째 요일
     const startDayOfWeek = firstDayOfMonth.getDay();
@@ -47,5 +47,26 @@ function renderCalandar() {
 }
 
 renderCalandar();
+
+prevBtn.addEventListener('click', function(){
+    currentMonth--;
+    if(currentMonth < 0){
+        currentYear--;
+        currentMonth = 11;
+    }
+    calendarDates.textContent = ''; // 전 월에 대한 element 제거
+    renderCalandar();
+})
+
+nextBtn.addEventListener('click', function(){
+    currentMonth++;
+    if(currentMonth > 11) {
+        currentYear++;
+        currentMonth = 0
+    }
+    calendarDates.textContent = ''; // 전 월에 대한 element 제거
+    renderCalandar();
+})
+
 
 
